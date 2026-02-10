@@ -1,5 +1,5 @@
 
-import { GoogleGenAI, Chat, GenerateContentResponse } from "@google/genai";
+import { GoogleGenAI } from "@google/genai";
 
 const SYSTEM_INSTRUCTION = `
 Você é a "IA Galileu", o assistente virtual inteligente da GALILEO Corretora de Seguros.
@@ -16,7 +16,7 @@ Sua função é explicar que:
 Slogan da empresa: "Cuidando do que importa para você".
 Valores: Neutralidade, Tecnologia, transparência e agilidade.
 
-Serviços oferecidos (Consultoria Multimarcas):
+Serviços oferecidos:
 1. Seguro Auto (carro, moto, frota)
 2. Planos de Saúde (individual, familiar, empresarial)
 3. Seguro Residencial
@@ -24,43 +24,73 @@ Serviços oferecidos (Consultoria Multimarcas):
 5. Seguro Empresarial
 6. Seguro Viagem
 
-Instruções:
+Instruções de Resposta:
 - Deixe claro que pesquisamos em todas as empresas do Brasil para o cliente.
 - Não mencione "Seguro Pet".
 - Seja profissional, empático e tecnológico.
-- Responda sempre em Português do Brasil.
+- Responda sempre em Português do Brasil de forma concisa.
 `;
 
 export const getGeminiResponse = async (userPrompt: string, history: { role: 'user' | 'model', text: string }[]) => {
   try {
     const apiKey = process.env.API_KEY;
-    if (!apiKey) {
-      throw new Error("API_KEY não configurada no ambiente.");
+    
+    if (!apiKey || apiKey === "undefined" || apiKey === "") {
+      console.error("ERRO: API_KEY não detectada.");
+      return "Olá! A minha chave de acesso (API_KEY) não foi detectada. Certifique-se de que você a adicionou nas variáveis de ambiente do Vercel com o nome exato 'API_KEY' e fez um novo Deploy.";
     }
 
     const ai = new GoogleGenAI({ apiKey });
-    
-    // Criamos um chat com o histórico formatado
-    const chat = ai.chats.create({
+
+    // A API do Gemini EXIGE que a conversa comece com um 'user'.
+    // Como nossa primeira mensagem no componente é da 'IA' (model), 
+    // precisamos filtrar o histórico para enviar apenas a partir do primeiro input do usuário.
+    const filteredHistory = history.filter((msg, index) => {
+      if (index === 0 && msg.role === 'model') return false;
+      return true;
+    });
+
+    const contents = [
+      ...filteredHistory.map(h => ({
+        role: h.role,
+        parts: [{ text: h.text }]
+      })),
+      {
+        role: 'user',
+        parts: [{ text: userPrompt }]
+      }
+    ];
+
+    const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
+      contents: contents,
       config: {
         systemInstruction: SYSTEM_INSTRUCTION,
         temperature: 0.7,
         topP: 0.95,
       },
-      // Note: history should be converted to Content format if needed, 
-      // but for simple message sending we can pass the last message.
-      // Or initialize the chat with history:
-      history: history.slice(0, -1).map(h => ({
-        role: h.role,
-        parts: [{ text: h.text }]
-      }))
     });
 
-    const result = await chat.sendMessage({ message: userPrompt });
-    return result.text || "Desculpe, tive um problema ao processar sua solicitação.";
-  } catch (error) {
-    console.error("Gemini API Error:", error);
-    return "Olá! Notei uma pequena instabilidade na conexão com meus servidores de IA. Para que você não fique esperando, que tal falar direto com um de nossos consultores humanos no WhatsApp? (11) 97976-1882";
+    const text = response.text;
+    
+    if (!text) {
+      throw new Error("Resposta vazia da API");
+    }
+
+    return text;
+  } catch (error: any) {
+    console.error("Gemini API Error Details:", error);
+    
+    const errorMsg = error.message || "";
+    
+    if (errorMsg.includes("API key not valid") || errorMsg.includes("403")) {
+      return "Sua chave de API parece inválida. Verifique se copiou o código corretamente do Google AI Studio.";
+    }
+    
+    if (errorMsg.includes("429")) {
+      return "Recebi muitas solicitações agora. Por favor, aguarde um instante ou fale conosco no WhatsApp (11) 97976-1882.";
+    }
+    
+    return "Olá! Tive um problema técnico ao processar sua dúvida. Pode ser uma instabilidade temporária. Enquanto eu me recupero, você pode falar com nosso time humano no WhatsApp: (11) 97976-1882";
   }
 };

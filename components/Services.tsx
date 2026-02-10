@@ -4,6 +4,11 @@ import { ChevronRight, ArrowUpRight } from 'lucide-react';
 import { INSURANCE_SERVICES, IconRenderer } from '../constants';
 
 const Services: React.FC = () => {
+  const handleQuote = (serviceTitle: string) => {
+    const message = encodeURIComponent(`Olá! Vi o site da GALILEO e gostaria de fazer uma cotação para: ${serviceTitle}.`);
+    window.open(`https://wa.me/5511979761882?text=${message}`, '_blank');
+  };
+
   return (
     <section id="seguros" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -29,7 +34,10 @@ const Services: React.FC = () => {
                 <div className="bg-blue-600 p-4 rounded-2xl shadow-lg shadow-blue-500/20 group-hover:scale-110 transition-transform">
                   <IconRenderer iconName={service.icon} className="w-8 h-8 text-white" />
                 </div>
-                <button className="p-3 rounded-full bg-white text-slate-400 group-hover:text-blue-600 group-hover:bg-blue-50 transition-all">
+                <button 
+                  onClick={() => handleQuote(service.title)}
+                  className="p-3 rounded-full bg-white text-slate-400 group-hover:text-blue-600 group-hover:bg-blue-50 transition-all"
+                >
                   <ArrowUpRight size={24} />
                 </button>
               </div>
@@ -48,7 +56,10 @@ const Services: React.FC = () => {
                 ))}
               </div>
               
-              <button className="w-full py-4 rounded-2xl bg-white border border-slate-200 text-slate-900 font-bold hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all shadow-sm">
+              <button 
+                onClick={() => handleQuote(service.title)}
+                className="w-full py-4 rounded-2xl bg-white border border-slate-200 text-slate-900 font-bold hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all shadow-sm"
+              >
                 Cotar em Todas
               </button>
             </div>

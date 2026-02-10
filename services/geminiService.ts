@@ -26,14 +26,15 @@ Serviços oferecidos (Consultoria Multimarcas):
 
 Instruções:
 - Deixe claro que pesquisamos em todas as empresas do Brasil para o cliente.
-- Não mencione "Seguro Pet" (este serviço não é mais o foco).
+- Não mencione "Seguro Pet".
 - Seja profissional, empático e tecnológico.
 - Responda sempre em Português do Brasil.
 `;
 
 export const getGeminiResponse = async (userPrompt: string, history: { role: 'user' | 'model', text: string }[]) => {
   try {
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || "" });
+    // A chave de API é injetada automaticamente via process.env.API_KEY
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
     
     const formattedHistory = history.map(h => ({
       role: h.role,
@@ -56,6 +57,6 @@ export const getGeminiResponse = async (userPrompt: string, history: { role: 'us
     return response.text || "Desculpe, tive um problema ao processar sua solicitação. Poderia repetir?";
   } catch (error) {
     console.error("Gemini API Error:", error);
-    return "Estou passando por uma manutenção rápida em meus circuitos. Por favor, tente novamente em instantes ou entre em contato diretamente com nossa equipe.";
+    return "Estou passando por uma manutenção rápida em meus circuitos para melhor atendê-lo. Por favor, tente novamente em instantes ou utilize nosso WhatsApp oficial (11) 97976-1882.";
   }
 };

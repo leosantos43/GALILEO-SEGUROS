@@ -4,6 +4,11 @@ import { CheckCircle2, HeartPulse, Stethoscope, Activity, Search } from 'lucide-
 import { HEALTH_PLANS } from '../constants';
 
 const HealthPlans: React.FC = () => {
+  const handleQuote = (planName: string) => {
+    const message = encodeURIComponent(`Olá! Gostaria de uma consultoria sobre Planos de Saúde. Tenho interesse no perfil: ${planName}.`);
+    window.open(`https://wa.me/5511979761882?text=${message}`, '_blank');
+  };
+
   return (
     <section id="saude" className="py-24 bg-blue-50/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -70,9 +75,16 @@ const HealthPlans: React.FC = () => {
                   ))}
                 </div>
 
-                <div className="flex items-center justify-between mt-8 pt-6 border-t border-current opacity-20">
+                <div className={`flex items-center justify-between mt-8 pt-6 border-t ${idx === 0 ? 'border-white/20' : 'border-slate-100'}`}>
                   <p className="font-bold text-lg uppercase tracking-tight">{plan.price}</p>
-                  <button className={`px-6 py-2.5 rounded-xl font-bold transition-all ${idx === 0 ? 'bg-white text-blue-600' : 'bg-blue-600 text-white'}`}>
+                  <button 
+                    onClick={() => handleQuote(plan.name)}
+                    className={`px-6 py-2.5 rounded-xl font-bold transition-all shadow-lg active:scale-95 ${
+                      idx === 0 
+                      ? 'bg-white text-blue-600 hover:bg-slate-50' 
+                      : 'bg-blue-600 text-white hover:bg-blue-700 shadow-blue-500/20'
+                    }`}
+                  >
                     Consultar Mercado
                   </button>
                 </div>

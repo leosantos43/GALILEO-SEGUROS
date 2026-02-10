@@ -35,13 +35,14 @@ const Hero: React.FC<HeroProps> = ({ setPage }) => {
                 Cuidando do que <br/><span className="text-blue-600">importa</span> para você.
               </h1>
               <p className="text-base md:text-xl text-slate-500 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
-                A GALILEO não é apenas uma corretora. Somos uma plataforma de inteligência que audita o mercado para garantir sua proteção total.
+                A GALILEO não é apenas uma corretora. Somos uma plataforma de inteligência que audita o mercado para garantir sua proteção total com tecnologia avançada.
               </p>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start">
               <button 
                 onClick={() => handleNav('cotacao')} 
+                aria-label="Iniciar cotação online personalizada"
                 className="group flex items-center justify-center space-x-3 bg-blue-600 hover:bg-blue-700 text-white px-10 py-5 rounded-2xl font-bold transition-all shadow-xl shadow-blue-600/30 hover:scale-[1.03] active:scale-95"
               >
                 <span>QUERO UMA COTAÇÃO</span>
@@ -49,6 +50,7 @@ const Hero: React.FC<HeroProps> = ({ setPage }) => {
               </button>
               <button 
                 onClick={() => handleNav('seguros')} 
+                aria-label="Conhecer todos os nossos produtos de seguros"
                 className="flex items-center justify-center space-x-3 bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 px-10 py-5 rounded-2xl font-bold transition-all shadow-sm hover:scale-[1.03] active:scale-95"
               >
                 <span>VER SEGUROS</span>
@@ -61,7 +63,7 @@ const Hero: React.FC<HeroProps> = ({ setPage }) => {
                 <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Transparência</p>
               </div>
               <div className="text-center lg:text-left">
-                <p className="text-3xl md:text-4xl font-bold font-tech text-slate-900 tracking-tighter">0s</p>
+                <p className="text-3xl md:text-4xl font-bold font-tech text-slate-900 tracking-tighter">10min</p>
                 <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Tempo de Resposta</p>
               </div>
               <div className="text-center lg:text-left">
@@ -75,8 +77,12 @@ const Hero: React.FC<HeroProps> = ({ setPage }) => {
             <div className="relative z-10 p-2 bg-slate-100 rounded-[3.5rem] shadow-2xl overflow-hidden group">
               <img 
                 src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&q=80&w=1200" 
-                alt="Galileo Intelligence Shield" 
+                alt="Galileo Inteligência Digital em Proteção de Patrimônio" 
                 className="rounded-[3rem] object-cover h-[650px] w-full group-hover:scale-110 transition-transform duration-[4s]"
+                /* Otimização LCP: Prioridade máxima para a imagem principal */
+                // @ts-ignore
+                fetchpriority="high"
+                loading="eager"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-blue-950/60 via-transparent to-transparent"></div>
               

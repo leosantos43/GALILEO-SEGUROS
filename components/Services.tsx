@@ -10,23 +10,23 @@ const Services: React.FC = () => {
   };
 
   return (
-    <section id="seguros" className="py-24 bg-white">
+    <section id="seguros" className="py-24 bg-white" aria-labelledby="services-title">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
           <div className="space-y-4 max-w-2xl">
             <h2 className="text-blue-600 font-tech font-bold tracking-[0.3em] uppercase text-sm">Independência & Tecnologia</h2>
-            <h3 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tight leading-none">
+            <h3 id="services-title" className="text-4xl md:text-6xl font-black text-slate-900 tracking-tight leading-none">
               Avaliamos o mercado <br/> para você não ter <span className="text-blue-600">dúvidas</span>.
             </h3>
           </div>
           <p className="text-slate-500 font-medium max-w-sm">
-            Nossa plataforma não está presa a nenhum grupo segurador. Nosso algoritmo auditado garante que a sugestão seja sempre técnica.
+            Nossa plataforma audita as melhores seguradoras (Porto, Bradesco, Azul, etc) para garantir que sua apólice seja sempre a mais técnica.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {INSURANCE_SERVICES.map((service) => (
-            <div 
+            <article 
               key={service.id} 
               className="group p-10 bg-slate-50 rounded-[3rem] border border-slate-100 hover:border-blue-600/30 hover:bg-white transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/10"
             >
@@ -36,6 +36,7 @@ const Services: React.FC = () => {
                 </div>
                 <button 
                   onClick={() => handleQuote(service.title)}
+                  aria-label={`Saber mais sobre ${service.title}`}
                   className="p-3 rounded-full bg-white text-slate-400 group-hover:text-blue-600 group-hover:bg-blue-50 transition-all"
                 >
                   <ArrowUpRight size={24} />
@@ -50,7 +51,7 @@ const Services: React.FC = () => {
               <div className="space-y-3 mb-10">
                 {service.details.map((detail, idx) => (
                   <div key={idx} className="flex items-center text-sm font-bold text-slate-700">
-                    <div className="w-2 h-2 rounded-full bg-blue-600 mr-3"></div>
+                    <div className="w-2 h-2 rounded-full bg-blue-600 mr-3" aria-hidden="true"></div>
                     {detail}
                   </div>
                 ))}
@@ -62,7 +63,7 @@ const Services: React.FC = () => {
               >
                 Cotar em Todas
               </button>
-            </div>
+            </article>
           ))}
         </div>
       </div>

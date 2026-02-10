@@ -4,103 +4,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>GALILEO Corretora | Seguros e Planos de Saúde Inteligentes</title>
-    <meta name="description" content="A GALILEO é a sua corretora de seguros tech. Comparamos Porto Seguro, Bradesco, Amil e as melhores seguradoras do mercado usando IA para proteger o que importa para você.">
-    <meta name="keywords" content="corretora de seguros, plano de saúde empresarial, seguro auto, seguro de vida, galileo seguros, corretora digital">
+    <title>GALILEO Corretora | Cuidando do que importa para você</title>
     
-    <!-- Open Graph / Facebook -->
+    <!-- SEO Primário -->
+    <meta name="description" content="A GALILEO é sua corretora tech de seguros e planos de saúde. Comparamos Porto Seguro, Bradesco, Amil e SulAmérica para encontrar a melhor proteção pelo menor preço.">
+    <meta name="keywords" content="corretora de seguros, plano de saúde, seguro auto, seguro de vida, galileo seguros, cotação de seguros online, porto seguro, bradesco saude">
+    <meta name="author" content="Galileo Tech">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://galileo.com.br/">
+
+    <!-- Open Graph / Facebook / WhatsApp -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://galileo.com.br/">
     <meta property="og:title" content="GALILEO | Cuidando do que importa para você">
-    <meta property="og:description" content="Proteção inteligente com tecnologia de ponta. Compare as melhores seguradoras em segundos.">
+    <meta property="og:description" content="Proteção inteligente com tecnologia de ponta. Compare as melhores seguradoras em segundos com a GALILEO.">
     <meta property="og:image" content="https://images.unsplash.com/photo-1454165833767-0266b196773b?auto=format&fit=crop&q=80&w=1200">
 
-    <!-- JSON-LD Structured Data for SEO -->
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://galileo.com.br/">
+    <meta property="twitter:title" content="GALILEO | Corretora de Seguros Tech">
+    <meta property="twitter:description" content="Avaliamos o mercado para você não ter dúvidas. Seguros e Planos de Saúde.">
+    <meta property="twitter:image" content="https://images.unsplash.com/photo-1454165833767-0266b196773b?auto=format&fit=crop&q=80&w=1200">
+
+    <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "InsuranceAgency",
       "name": "GALILEO Corretora de Seguros",
-      "alternateName": "Galileo Tech Seguros",
       "url": "https://galileo.com.br",
       "logo": "https://galileo.com.br/logo.png",
       "slogan": "Cuidando do que importa para você",
-      "description": "Corretora de seguros independente que utiliza IA para comparar as melhores operadoras do mercado brasileiro.",
+      "description": "Corretora de seguros independente que utiliza tecnologia para comparar as melhores operadoras do mercado brasileiro.",
+      "telephone": "+55-11-97976-1882",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "São Paulo",
         "addressRegion": "SP",
         "addressCountry": "BR"
-      },
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+55-11-97976-1882",
-        "contactType": "customer service",
-        "areaServed": "BR",
-        "availableLanguage": "Portuguese"
       }
     }
     </script>
     
-    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'%3E%3C/path%3E%3C/svg%3E">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
-        html, body, #root {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            width: 100%;
+        html, body, #root { height: 100%; margin: 0; padding: 0; width: 100%; }
+        body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        .font-tech { font-family: 'Orbitron', sans-serif; }
+        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(0, 0, 0, 0.05); }
+        .grid-bg { background-image: radial-gradient(circle at 2px 2px, rgba(37, 99, 235, 0.05) 1px, transparent 0); background-size: 32px 32px; }
+        
+        /* Preloader Styles */
+        #preloader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #ffffff; z-index: 9999; display: flex;
+            align-items: center; justify-content: center; transition: opacity 0.5s ease;
         }
-        body {
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-        .font-tech {
-            font-family: 'Orbitron', sans-serif;
-        }
-        .glass {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-        .grid-bg {
-            background-image: radial-gradient(circle at 2px 2px, rgba(37, 99, 235, 0.05) 1px, transparent 0);
-            background-size: 32px 32px;
-        }
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-        .floating {
-            animation: float 4s ease-in-out infinite;
-        }
+        .loader-logo { font-family: 'Orbitron', sans-serif; font-weight: 900; letter-spacing: -0.05em; color: #2563eb; font-size: 2.5rem; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 0.5; transform: scale(0.98); } 50% { opacity: 1; transform: scale(1); } 100% { opacity: 0.5; transform: scale(0.98); } }
     </style>
+
 <script type="importmap">
 {
   "imports": {
     "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
     "react/": "https://esm.sh/react@^19.2.4/",
     "react": "https://esm.sh/react@^19.2.4",
-    "@google/genai": "https://esm.sh/@google/genai@^1.40.0",
     "lucide-react": "https://esm.sh/lucide-react@^0.563.0"
   }
 }
 </script>
 <link rel="stylesheet" href="/index.css">
 </head>
-<body class="bg-slate-50 text-slate-900 selection:bg-blue-100 selection:text-blue-900 grid-bg">
+<body class="bg-slate-50 text-slate-900 grid-bg">
+    <!-- Splash Screen para Carregamento Perceptível -->
+    <div id="preloader">
+        <div class="loader-logo">GALILEO</div>
+    </div>
+
     <div id="root"></div>
-    <!-- Script de entrada explícito para garantir carregamento -->
     <script type="module" src="./index.tsx"></script>
+
+    <script>
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('preloader');
+            if(loader) {
+                loader.style.opacity = '0';
+                setTimeout(() => loader.style.display = 'none', 500);
+            }
+        });
+    </script>
 <script type="module" src="/index.tsx"></script>
 </body>
 </html>

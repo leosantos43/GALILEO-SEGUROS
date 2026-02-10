@@ -1,5 +1,5 @@
 
-export type Page = 'home' | 'seguros' | 'saude' | 'sobre' | 'ia' | 'contato' | 'cotacao';
+export type Page = 'home' | 'seguros' | 'saude' | 'sobre' | 'contato' | 'cotacao';
 
 export interface InsuranceService {
   id: string;

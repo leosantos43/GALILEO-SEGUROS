@@ -41,10 +41,10 @@ const Hero: React.FC<HeroProps> = ({ setPage }) => {
 
             <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start">
               <button 
-                onClick={() => handleNav('ia')} 
+                onClick={() => handleNav('cotacao')} 
                 className="group flex items-center justify-center space-x-3 bg-blue-600 hover:bg-blue-700 text-white px-10 py-5 rounded-2xl font-bold transition-all shadow-xl shadow-blue-600/30 hover:scale-[1.03] active:scale-95"
               >
-                <span>CONSULTORIA COM IA</span>
+                <span>QUERO UMA COTAÇÃO</span>
                 <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
               <button 

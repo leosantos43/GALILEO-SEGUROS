@@ -23,7 +23,6 @@ export const NAV_ITEMS: NavItem[] = [
   { label: 'Seguros', href: 'seguros' },
   { label: 'Planos de Saúde', href: 'saude' },
   { label: 'Sobre Nós', href: 'sobre' },
-  { label: 'IA Galileu', href: 'ia' },
   { label: 'Contato', href: 'contato' },
 ];
 

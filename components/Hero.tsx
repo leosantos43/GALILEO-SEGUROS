@@ -1,8 +1,18 @@
 
 import React from 'react';
-import { ChevronRight, ShieldCheck, Zap, Globe, MousePointer2 } from 'lucide-react';
+import { ChevronRight, ShieldCheck } from 'lucide-react';
+import { Page } from '../types';
 
-const Hero: React.FC = () => {
+interface HeroProps {
+  setPage: (page: Page) => void;
+}
+
+const Hero: React.FC<HeroProps> = ({ setPage }) => {
+  const handleNav = (p: Page) => {
+    setPage(p);
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  };
+
   return (
     <section id="inicio" className="relative pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden min-h-[85vh] md:min-h-[90vh] flex items-center bg-white">
       {/* Background elements */}
@@ -30,13 +40,19 @@ const Hero: React.FC = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <a href="#ia" className="group flex items-center justify-center space-x-3 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 md:px-10 md:py-5 rounded-2xl font-bold transition-all shadow-xl shadow-blue-600/20 hover:scale-[1.02]">
+              <button 
+                onClick={() => handleNav('ia')} 
+                className="group flex items-center justify-center space-x-3 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 md:px-10 md:py-5 rounded-2xl font-bold transition-all shadow-xl shadow-blue-600/20 hover:scale-[1.02]"
+              >
                 <span>CONSULTORIA COM IA</span>
                 <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </a>
-              <a href="#seguros" className="flex items-center justify-center space-x-3 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 px-8 py-4 md:px-10 md:py-5 rounded-2xl font-bold transition-all shadow-sm">
+              </button>
+              <button 
+                onClick={() => handleNav('seguros')} 
+                className="flex items-center justify-center space-x-3 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 px-8 py-4 md:px-10 md:py-5 rounded-2xl font-bold transition-all shadow-sm hover:scale-[1.02]"
+              >
                 <span>VER SEGUROS</span>
-              </a>
+              </button>
             </div>
 
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-8 md:gap-12 pt-6 md:pt-10">

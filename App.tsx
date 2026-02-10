@@ -18,12 +18,29 @@ import {
   FileText, 
   BarChart3,
   Globe,
-  Layers
+  Layers,
+  MessageCircle,
+  Plus,
+  Minus,
+  Car,
+  HeartPulse,
+  Building2,
+  UserPlus,
+  Briefcase,
+  AlertCircle,
+  Hash
 } from 'lucide-react';
+
+const WHATSAPP_LINK = "https://wa.me/5511979761882";
+
+const handleWhatsappClick = (messageContent: string) => {
+  const message = encodeURIComponent(messageContent);
+  window.open(`${WHATSAPP_LINK}?text=${message}`, '_blank');
+};
 
 const HomePage: React.FC<{ setPage: (p: Page) => void }> = ({ setPage }) => (
   <>
-    <Hero />
+    <Hero setPage={setPage} />
     <section className="py-16 md:py-24 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 text-center">
         <h2 className="text-blue-600 font-tech font-bold uppercase tracking-[0.3em] text-[10px] md:text-sm mb-4">Plataforma Multicálculo</h2>
@@ -35,7 +52,7 @@ const HomePage: React.FC<{ setPage: (p: Page) => void }> = ({ setPage }) => (
             { icon: <BarChart3 />, title: "Melhor Custo-Benefício", desc: "Nossa IA filtra as apólices com as melhores notas técnicas e menores preços." },
             { icon: <ShieldCheck />, title: "Independência Total", desc: "Nossa fidelidade é com você, não com uma seguradora específica." }
           ].map((item, i) => (
-            <div key={i} className="p-6 md:p-8 bg-white rounded-[2rem] md:rounded-[2.5rem] shadow-sm border border-slate-100 hover:shadow-xl transition-all">
+            <div key={i} className="p-6 md:p-8 bg-white rounded-[2rem] md:rounded-[2.5rem] shadow-sm border border-slate-100 hover:shadow-xl transition-all text-center">
               <div className="bg-blue-50 w-12 h-12 md:w-16 md:h-16 rounded-2xl flex items-center justify-center text-blue-600 mx-auto mb-6">
                 {item.icon}
               </div>
@@ -60,13 +77,6 @@ const InsurancePage: React.FC = () => (
         <p className="text-base md:text-xl text-slate-500 max-w-2xl mx-auto">Trabalhamos com as 20 maiores seguradoras do Brasil para oferecer proteção sem viés.</p>
       </div>
       <Services />
-      <div className="mt-16 md:mt-20 p-8 md:p-12 bg-blue-600 rounded-[2rem] md:rounded-[3rem] text-white flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
-        <div className="space-y-4">
-          <h2 className="text-2xl md:text-3xl font-bold">Por que cotar com a Galileo?</h2>
-          <p className="opacity-90 max-w-lg text-sm md:text-base">Ao invés de falar com uma seguradora por vez, nossa plataforma faz o trabalho pesado por você em segundos, comparando franquias e coberturas.</p>
-        </div>
-        <button className="w-full md:w-auto bg-white text-blue-600 px-8 py-4 md:px-10 md:py-5 rounded-2xl font-black shadow-xl hover:scale-105 transition-all">Comparar Agora</button>
-      </div>
     </div>
   </div>
 );
@@ -79,23 +89,6 @@ const HealthPage: React.FC = () => (
         <p className="text-base md:text-xl text-slate-500 max-w-2xl mx-auto">Bradesco, SulAmérica, Amil, Porto Saúde e muito mais. Analisamos qual rede atende melhor sua região.</p>
       </div>
       <HealthPlans />
-      <div className="mt-16 md:mt-24 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-        <div className="space-y-6">
-          <h2 className="text-2xl md:text-3xl font-black text-slate-900">Consultoria Imparcial</h2>
-          <p className="text-slate-500 font-medium text-sm md:text-base">Diferente de corretores vinculados a um único grupo, na Galileo avaliamos o histórico de reajustes e qualidade de rede de todas as operadoras antes de sugerir um plano.</p>
-          <ul className="space-y-4">
-            {['Análise de Reajustes Históricos', 'Mapeamento de Hospitais Próximos', 'Estudo de Redução de Custos', 'Suporte Pós-Venda Multi-Canal'].map((t, i) => (
-              <li key={i} className="flex items-center space-x-3 text-slate-700 font-bold text-sm md:text-base">
-                <CheckCircle2 className="text-blue-600 flex-shrink-0" size={20} />
-                <span>{t}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="aspect-video bg-slate-100 rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl">
-          <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=800" alt="Health Tech Comparison" className="w-full h-full object-cover" />
-        </div>
-      </div>
     </div>
   </div>
 );
@@ -109,38 +102,80 @@ const AboutPage: React.FC = () => (
           <p className="text-base md:text-lg text-slate-500 font-medium leading-relaxed">
             A GALILEO atua como o seu braço direito no mercado de seguros. Como uma corretora independente e tecnológica, não temos produtos próprios; nossa missão é auditar e selecionar o que há de melhor nas seguradoras tradicionais.
           </p>
-          <div className="grid grid-cols-2 gap-6 md:gap-8 max-w-sm mx-auto lg:mx-0">
-            <div>
-              <p className="text-3xl md:text-4xl font-black text-blue-600">40+</p>
-              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Parceiras</p>
-            </div>
-            <div>
-              <p className="text-3xl md:text-4xl font-black text-blue-600">0%</p>
-              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Conflito</p>
-            </div>
-          </div>
         </div>
         <div className="relative">
           <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800" className="rounded-[2.5rem] md:rounded-[4rem] shadow-2xl w-full" alt="Galileo Global Hub" />
-          <div className="absolute -bottom-6 -left-6 md:-bottom-10 md:-left-10 bg-white p-6 md:p-8 rounded-[2rem] md:rounded-[3rem] shadow-2xl border border-slate-50 max-w-[180px] md:max-w-none">
-             <Globe className="text-blue-600 w-8 h-8 md:w-12 md:h-12 mb-4" />
-             <p className="font-bold text-slate-900 text-sm md:text-base">Mercado Aberto</p>
-             <p className="text-[10px] text-slate-400">Acesso a todas as seguradoras</p>
-          </div>
         </div>
       </div>
     </div>
   </div>
 );
 
-const QuotePage: React.FC = () => {
+const QuotePage: React.FC<{ setPage: (p: Page) => void }> = ({ setPage }) => {
   const [step, setStep] = useState(1);
+  const [interest, setInterest] = useState('');
+  
+  // States for specific forms
+  const [autoData, setAutoData] = useState({ placa: '', marca: '', modelo: '', nomeMotorista: '', dataNascimento: '' });
+  const [healthData, setHealthData] = useState({ vidas: 1, idades: [''], empresa: '' });
+  const [lifeData, setLifeData] = useState({ nome: '', cpf: '', dataNascimento: '' });
+  const [businessData, setBusinessData] = useState({ empresa: '', ramo: '' });
+  const [generalData, setGeneralData] = useState({ nome: '', email: '', whatsapp: '' });
+
+  const handleHealthVidasChange = (action: 'add' | 'remove' | 'manual', value?: number) => {
+    let newVidas = healthData.vidas;
+    if (action === 'add' && healthData.vidas < 10000) newVidas = healthData.vidas + 1;
+    else if (action === 'remove' && healthData.vidas > 1) newVidas = healthData.vidas - 1;
+    else if (action === 'manual' && value !== undefined) newVidas = isNaN(value) ? 1 : Math.max(1, value);
+
+    // If corporate, we don't care about ages. If individual, we maintain up to 30.
+    const isCorporate = interest === 'Plano de Saúde Empresarial';
+    const newIdades = (!isCorporate && newVidas <= 30)
+      ? Array(newVidas).fill('').map((_, i) => healthData.idades[i] || '')
+      : [];
+
+    setHealthData({ ...healthData, vidas: newVidas, idades: newIdades });
+  };
+
+  const generateAndSend = () => {
+    let msg = `🔵 *COTAÇÃO GALILEO - ${interest.toUpperCase()}*\n\n`;
+    
+    if (interest === 'Seguro Auto') {
+      msg += `🚗 *VEÍCULO*\n• Placa: ${autoData.placa}\n• Marca: ${autoData.marca}\n• Modelo: ${autoData.modelo}\n\n`;
+      msg += `👤 *CONDUTOR*\n• Nome: ${autoData.nomeMotorista}\n• Nasc: ${autoData.dataNascimento}\n`;
+    } 
+    else if (interest === 'Plano de Saúde Individual' || interest === 'Plano de Saúde Empresarial') {
+      const isCorporate = interest === 'Plano de Saúde Empresarial';
+      if (isCorporate) msg += `🏢 *EMPRESA:* ${healthData.empresa}\n`;
+      msg += `🏥 *TOTAL DE VIDAS:* ${healthData.vidas}\n`;
+      
+      if (!isCorporate && healthData.vidas <= 30) {
+        msg += `• Idades: ${healthData.idades.join(', ')}\n`;
+      } else if (isCorporate) {
+        msg += `• *Tipo:* Saúde Coletivo Empresarial\n`;
+      } else {
+        msg += `• *Volume:* Acima de 30 vidas (Análise por Sinistralidade/Taxa Média)\n`;
+      }
+    } 
+    else if (interest === 'Seguro de Vida') {
+      msg += `👤 *SEGURADO*\n• Nome: ${lifeData.nome}\n• CPF: ${lifeData.cpf}\n• Nasc: ${lifeData.dataNascimento}\n`;
+    }
+    else if (interest === 'Seguro Empresarial') {
+      msg += `🏢 *EMPRESA*\n• Razão Social: ${businessData.empresa}\n• Ramo de Atividade: ${businessData.ramo}\n`;
+    }
+
+    msg += `\n📞 *DADOS DO SOLICITANTE*\n• Nome: ${generalData.nome}\n• WhatsApp: ${generalData.whatsapp}`;
+    
+    handleWhatsappClick(msg);
+    setStep(3);
+  };
+
   return (
     <div className="pt-24 md:pt-40 pb-16 md:pb-24 min-h-screen bg-slate-50">
-      <div className="max-w-3xl mx-auto px-4">
+      <div className="max-w-4xl mx-auto px-4">
         <div className="bg-white rounded-[2rem] md:rounded-[3rem] p-8 md:p-12 shadow-2xl border border-slate-100">
           <div className="flex flex-col sm:flex-row items-center justify-between mb-8 md:mb-12 gap-6">
-            <h1 className="text-2xl md:text-3xl font-black text-slate-900 text-center sm:text-left">Cotar em todo Mercado</h1>
+            <h1 className="text-2xl md:text-3xl font-black text-slate-900">Multicálculo Galileo</h1>
             <div className="flex space-x-2">
               {[1, 2, 3].map(i => (
                 <div key={i} className={`w-8 md:w-12 h-1.5 rounded-full ${step >= i ? 'bg-blue-600' : 'bg-slate-100'}`}></div>
@@ -150,42 +185,223 @@ const QuotePage: React.FC = () => {
 
           {step === 1 && (
             <div className="space-y-6 md:space-y-8 animate-in fade-in slide-in-from-right-4">
-              <h2 className="text-lg md:text-xl font-bold text-slate-700 text-center sm:text-left">Qual o foco da comparação?</h2>
-              <div className="grid grid-cols-1 xs:grid-cols-2 gap-3 md:gap-4">
-                {['Seguro Auto', 'Plano de Saúde', 'Seguro de Vida', 'Residencial', 'Empresarial'].map(t => (
-                  <button key={t} onClick={() => setStep(2)} className="p-4 md:p-6 bg-slate-50 rounded-xl md:rounded-2xl border border-slate-100 font-bold hover:border-blue-600 hover:bg-blue-50 transition-all text-slate-700 text-sm md:text-base">{t}</button>
+              <h2 className="text-lg md:text-xl font-bold text-slate-700 text-center sm:text-left">Selecione o tipo de proteção:</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {[
+                  { label: 'Seguro Auto', icon: <Car /> },
+                  { label: 'Plano de Saúde Individual', icon: <HeartPulse /> },
+                  { label: 'Plano de Saúde Empresarial', icon: <Building2 /> },
+                  { label: 'Seguro de Vida', icon: <UserPlus /> },
+                  { label: 'Seguro Empresarial', icon: <Briefcase /> },
+                  { label: 'Outros Seguros', icon: <ShieldCheck /> }
+                ].map(item => (
+                  <button 
+                    key={item.label} 
+                    onClick={() => { setInterest(item.label); setStep(2); }} 
+                    className="p-6 bg-slate-50 rounded-2xl border border-slate-100 font-bold hover:border-blue-600 hover:bg-blue-50 transition-all text-slate-700 flex flex-col items-center justify-center gap-4 group"
+                  >
+                    <div className="text-slate-400 group-hover:text-blue-600 transition-colors">
+                      {item.icon}
+                    </div>
+                    <span className="text-sm md:text-base text-center leading-tight">{item.label}</span>
+                  </button>
                 ))}
               </div>
             </div>
           )}
 
           {step === 2 && (
-            <div className="space-y-6 md:space-y-8 animate-in fade-in slide-in-from-right-4">
-              <h2 className="text-lg md:text-xl font-bold text-slate-700 text-center sm:text-left">Seus dados para o multicálculo</h2>
-              <div className="space-y-4">
-                <input type="text" placeholder="Nome completo" className="w-full p-4 bg-slate-50 rounded-xl border border-slate-100 outline-none focus:ring-2 focus:ring-blue-600 transition-all" />
-                <input type="email" placeholder="E-mail" className="w-full p-4 bg-slate-50 rounded-xl border border-slate-100 outline-none focus:ring-2 focus:ring-blue-600 transition-all" />
-                <input type="tel" placeholder="WhatsApp" className="w-full p-4 bg-slate-50 rounded-xl border border-slate-100 outline-none focus:ring-2 focus:ring-blue-600 transition-all" />
+            <div className="space-y-8 animate-in fade-in slide-in-from-right-4">
+              <div className="flex items-center space-x-3 pb-4 border-b border-slate-100">
+                <div className="w-10 h-10 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center">
+                  <FileText size={20} />
+                </div>
+                <h2 className="text-lg md:text-xl font-bold text-slate-700">Dados do {interest}</h2>
               </div>
+              
+              <div className="space-y-6">
+                {/* AUTO FORM */}
+                {interest === 'Seguro Auto' && (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input type="text" placeholder="Placa do Veículo" className="input-field" value={autoData.placa} onChange={e => setAutoData({...autoData, placa: e.target.value})} />
+                    <input type="text" placeholder="Marca (Ex: Toyota)" className="input-field" value={autoData.marca} onChange={e => setAutoData({...autoData, marca: e.target.value})} />
+                    <input type="text" placeholder="Modelo (Ex: Corolla)" className="input-field" value={autoData.modelo} onChange={e => setAutoData({...autoData, modelo: e.target.value})} />
+                    <input type="text" placeholder="Nome do Motorista Principal" className="input-field" value={autoData.nomeMotorista} onChange={e => setAutoData({...autoData, nomeMotorista: e.target.value})} />
+                    <div className="md:col-span-2">
+                      <label className="text-[10px] uppercase font-bold text-slate-400 ml-2 mb-1 block">Data de Nascimento do Motorista</label>
+                      <input type="date" className="input-field" value={autoData.dataNascimento} onChange={e => setAutoData({...autoData, dataNascimento: e.target.value})} />
+                    </div>
+                  </div>
+                )}
+
+                {/* HEALTH FORM */}
+                {(interest === 'Plano de Saúde Individual' || interest === 'Plano de Saúde Empresarial') && (
+                  <div className="space-y-6">
+                    {interest === 'Plano de Saúde Empresarial' && (
+                      <input 
+                        type="text" 
+                        placeholder="Nome da Empresa / Razão Social" 
+                        className="input-field" 
+                        value={healthData.empresa} 
+                        onChange={e => setHealthData({...healthData, empresa: e.target.value})} 
+                      />
+                    )}
+                    
+                    <div className="p-6 bg-blue-50 rounded-[2rem] border border-blue-100 space-y-6">
+                      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div className="space-y-1">
+                          <p className="font-black text-blue-900 text-lg">Quantidade de Vidas</p>
+                          <p className="text-xs text-blue-600 font-medium">Informe o total de beneficiários (titulares + dependentes).</p>
+                        </div>
+                        <div className="flex items-center space-x-2 bg-white p-2 rounded-2xl shadow-sm border border-blue-100">
+                          <button 
+                            onClick={() => handleHealthVidasChange('remove')} 
+                            className="w-12 h-12 bg-slate-50 hover:bg-blue-600 hover:text-white rounded-xl flex items-center justify-center text-blue-600 transition-all"
+                          >
+                            <Minus size={20}/>
+                          </button>
+                          
+                          <div className="relative group">
+                            <Hash className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-300 w-4 h-4" />
+                            <input 
+                              type="number" 
+                              placeholder="0"
+                              className="w-24 md:w-32 bg-transparent text-center text-3xl font-black text-blue-900 outline-none pl-6" 
+                              value={healthData.vidas} 
+                              onChange={(e) => handleHealthVidasChange('manual', parseInt(e.target.value))}
+                            />
+                          </div>
+
+                          <button 
+                            onClick={() => handleHealthVidasChange('add')} 
+                            className="w-12 h-12 bg-slate-50 hover:bg-blue-600 hover:text-white rounded-xl flex items-center justify-center text-blue-600 transition-all"
+                          >
+                            <Plus size={20}/>
+                          </button>
+                        </div>
+                      </div>
+
+                      {interest === 'Plano de Saúde Empresarial' && (
+                        <div className="flex items-start space-x-3 bg-white/60 p-4 rounded-2xl border border-blue-200 animate-in fade-in slide-in-from-top-2">
+                          <Building2 className="text-blue-600 shrink-0 mt-0.5" size={20} />
+                          <div>
+                            <p className="text-xs text-blue-900 font-black uppercase tracking-wider mb-1">Cotação Corporativa</p>
+                            <p className="text-[11px] text-blue-800 font-medium leading-relaxed">
+                              Como se trata de um plano empresarial, nossa IA analisará o perfil do seu grupo. Não é necessário preencher as idades agora; nossa equipe fará o estudo técnico completo da rede credenciada e carências.
+                            </p>
+                          </div>
+                        </div>
+                      )}
+
+                      {interest === 'Plano de Saúde Individual' && healthData.vidas > 30 && (
+                        <div className="flex items-start space-x-3 bg-white/60 p-4 rounded-2xl border border-blue-200">
+                          <AlertCircle className="text-blue-600 shrink-0 mt-0.5" size={20} />
+                          <p className="text-[11px] text-blue-800 font-medium leading-relaxed">
+                            Para grupos individuais acima de 30 vidas, a precificação é realizada via taxa média. Estamos prontos para processar seu volume.
+                          </p>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Show ages ONLY if NOT corporate AND vidas <= 30 */}
+                    {interest === 'Plano de Saúde Individual' && healthData.vidas <= 30 && (
+                      <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-4 animate-in fade-in duration-500">
+                        {healthData.idades.map((idade, idx) => (
+                          <div key={idx} className="space-y-1">
+                            <label className="text-[10px] uppercase font-bold text-slate-400 ml-2 block">{idx + 1}ª Vida</label>
+                            <input 
+                              type="number" 
+                              placeholder="Idade" 
+                              className="input-field text-center" 
+                              value={idade} 
+                              onChange={e => {
+                                const newIdades = [...healthData.idades];
+                                newIdades[idx] = e.target.value;
+                                setHealthData({...healthData, idades: newIdades});
+                              }} 
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* LIFE FORM */}
+                {interest === 'Seguro de Vida' && (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input type="text" placeholder="Nome Completo do Segurado" className="input-field" value={lifeData.nome} onChange={e => setLifeData({...lifeData, nome: e.target.value})} />
+                    <input type="text" placeholder="CPF (Apenas números)" className="input-field" value={lifeData.cpf} onChange={e => setLifeData({...lifeData, cpf: e.target.value})} />
+                    <div className="md:col-span-2">
+                      <label className="text-[10px] uppercase font-bold text-slate-400 ml-2 mb-1 block">Data de Nascimento</label>
+                      <input type="date" className="input-field" value={lifeData.dataNascimento} onChange={e => setLifeData({...lifeData, dataNascimento: e.target.value})} />
+                    </div>
+                  </div>
+                )}
+
+                {/* BUSINESS FORM */}
+                {interest === 'Seguro Empresarial' && (
+                  <div className="grid grid-cols-1 gap-4">
+                    <input type="text" placeholder="Nome da Empresa / Razão Social" className="input-field" value={businessData.empresa} onChange={e => setBusinessData({...businessData, empresa: e.target.value})} />
+                    <input type="text" placeholder="Ramo de Atividade (Ex: Padaria, Clínica, E-commerce)" className="input-field" value={businessData.ramo} onChange={e => setBusinessData({...businessData, ramo: e.target.value})} />
+                  </div>
+                )}
+
+                <hr className="border-slate-100" />
+                
+                <div className="space-y-4">
+                  <h3 className="font-bold text-slate-700">Onde enviamos sua cotação?</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input type="text" placeholder="Seu Nome" className="input-field" value={generalData.nome} onChange={e => setGeneralData({...generalData, nome: e.target.value})} />
+                    <input type="tel" placeholder="Seu WhatsApp" className="input-field" value={generalData.whatsapp} onChange={e => setGeneralData({...generalData, whatsapp: e.target.value})} />
+                  </div>
+                </div>
+              </div>
+
               <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
-                 <button onClick={() => setStep(1)} className="flex-1 p-4 bg-slate-100 rounded-xl font-bold text-slate-500 order-2 sm:order-1">Voltar</button>
-                 <button onClick={() => setStep(3)} className="flex-[2] p-4 bg-blue-600 text-white rounded-xl font-bold shadow-lg shadow-blue-500/20 order-1 sm:order-2">Gerar Orçamentos</button>
+                 <button onClick={() => setStep(1)} className="flex-1 p-4 bg-slate-100 rounded-xl font-bold text-slate-500 order-2 sm:order-1 transition-all hover:bg-slate-200">Voltar</button>
+                 <button onClick={generateAndSend} className="flex-[2] p-4 bg-blue-600 text-white rounded-xl font-bold shadow-lg shadow-blue-500/20 order-1 sm:order-2 flex items-center justify-center gap-2 hover:bg-blue-700 transition-colors">
+                   <MessageCircle size={18} />
+                   Solicitar Orçamento Agora
+                 </button>
               </div>
             </div>
           )}
 
           {step === 3 && (
-            <div className="text-center space-y-6 animate-in zoom-in-95">
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 md:mb-8">
-                <CheckCircle2 size={32} md={40} />
+            <div className="text-center space-y-6 animate-in zoom-in-95 duration-500">
+              <div className="w-24 h-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-8 shadow-inner">
+                <CheckCircle2 size={48} />
               </div>
-              <h2 className="text-2xl md:text-3xl font-black text-slate-900 leading-tight">Analisando o Mercado...</h2>
-              <p className="text-sm md:text-base text-slate-500 font-medium leading-relaxed">Nossa plataforma está conectando com as 20 seguradoras parceiras. Em instantes você receberá o estudo via WhatsApp.</p>
-              <button onClick={() => window.location.href = '/'} className="w-full p-4 md:p-5 bg-blue-600 text-white rounded-xl md:rounded-2xl font-black shadow-xl">Voltar ao Início</button>
+              <h2 className="text-3xl font-black text-slate-900 tracking-tight">Solicitação Enviada!</h2>
+              <p className="text-slate-500 font-medium max-w-sm mx-auto">Sua cotação técnica foi processada com sucesso. Estamos redirecionando você para o atendimento especializado via WhatsApp.</p>
+              <button onClick={() => setPage('home')} className="w-full p-5 bg-blue-600 text-white rounded-2xl font-black shadow-xl hover:scale-105 transition-all">Página Inicial</button>
             </div>
           )}
         </div>
       </div>
+      <style>{`
+        .input-field {
+          width: 100%;
+          padding: 1rem;
+          background-color: #f8fafc;
+          border: 1px solid #f1f5f9;
+          border-radius: 0.75rem;
+          outline: none;
+          font-weight: 500;
+          transition: all 0.2s;
+        }
+        .input-field:focus {
+          border-color: #2563eb;
+          box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+          background-color: white;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+      `}</style>
     </div>
   );
 };
@@ -194,7 +410,6 @@ const App: React.FC = () => {
   const [page, setPage] = useState<Page>('home');
 
   useEffect(() => {
-    // Reveal animations
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add('reveal-visible');
@@ -212,7 +427,7 @@ const App: React.FC = () => {
       case 'sobre': return <AboutPage />;
       case 'ia': return <AIAssistant />;
       case 'contato': return <Contact />;
-      case 'cotacao': return <QuotePage />;
+      case 'cotacao': return <QuotePage setPage={setPage} />;
       default: return <HomePage setPage={setPage} />;
     }
   };

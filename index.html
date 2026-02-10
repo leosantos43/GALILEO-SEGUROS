@@ -4,8 +4,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GALILEO | Cuidando do que importa para você</title>
-    <meta name="description" content="GALILEO Corretora de Seguros - Proteção inteligente para sua vida, família e empresa. Planos de saúde premium e seguros com a melhor tecnologia de comparação do mercado.">
+    <title>GALILEO Corretora | Seguros e Planos de Saúde Inteligentes</title>
+    <meta name="description" content="A GALILEO é a sua corretora de seguros tech. Comparamos Porto Seguro, Bradesco, Amil e as melhores seguradoras do mercado usando IA para proteger o que importa para você.">
+    <meta name="keywords" content="corretora de seguros, plano de saúde empresarial, seguro auto, seguro de vida, galileo seguros, corretora digital">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://galileo.com.br/">
+    <meta property="og:title" content="GALILEO | Cuidando do que importa para você">
+    <meta property="og:description" content="Proteção inteligente com tecnologia de ponta. Compare as melhores seguradoras em segundos.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1454165833767-0266b196773b?auto=format&fit=crop&q=80&w=1200">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="GALILEO Corretora de Seguros Tech">
+    <meta property="twitter:description" content="Sua vida e empresa protegidas pela inteligência de dados da Galileo.">
+
+    <!-- JSON-LD Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "InsuranceAgency",
+      "name": "GALILEO Corretora de Seguros",
+      "alternateName": "Galileo Tech Seguros",
+      "url": "https://galileo.com.br",
+      "logo": "https://galileo.com.br/logo.png",
+      "slogan": "Cuidando do que importa para você",
+      "description": "Corretora de seguros independente que utiliza IA para comparar as melhores operadoras do mercado brasileiro.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "São Paulo",
+        "addressRegion": "SP",
+        "addressCountry": "BR"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+55-11-97976-1882",
+        "contactType": "customer service",
+        "areaServed": "BR",
+        "availableLanguage": "Portuguese"
+      },
+      "sameAs": [
+        "https://www.instagram.com/galileoseguros",
+        "https://www.linkedin.com/company/galileoseguros"
+      ]
+    }
+    </script>
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'%3E%3C/path%3E%3C/svg%3E">
@@ -29,17 +73,21 @@
             border: 1px solid rgba(0, 0, 0, 0.05);
         }
         .glow-blue {
-            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.15);
+            box-shadow: 0 10px 40px rgba(37, 99, 235, 0.2);
         }
         .tech-card {
             background: white;
             border: 1px solid rgba(0, 0, 0, 0.05);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .tech-card:hover {
             border-color: #2563eb;
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.1);
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px rgba(37, 99, 235, 0.12);
+        }
+        .grid-bg {
+            background-image: radial-gradient(circle at 2px 2px, rgba(37, 99, 235, 0.05) 1px, transparent 0);
+            background-size: 32px 32px;
         }
         ::-webkit-scrollbar {
             width: 8px;
@@ -52,7 +100,15 @@
             border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
+            background: #2563eb;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .floating {
+            animation: float 4s ease-in-out infinite;
         }
     </style>
 <script type="importmap">
@@ -68,7 +124,7 @@
 </script>
 <link rel="stylesheet" href="/index.css">
 </head>
-<body class="bg-slate-50 text-slate-900 selection:bg-blue-100 selection:text-blue-900">
+<body class="bg-slate-50 text-slate-900 selection:bg-blue-100 selection:text-blue-900 grid-bg">
     <div id="root"></div>
 <script type="module" src="/index.tsx"></script>
 </body>

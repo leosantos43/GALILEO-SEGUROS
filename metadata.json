@@ -1,0 +1,8 @@
+
+{
+  "name": "GALILEO | Cuidando do que importa para você",
+  "description": "GALILEO Corretora de Seguros e Planos de Saúde. Utilizamos inteligência artificial para comparar as melhores seguradoras do mercado e proteger o que é importante para você.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}

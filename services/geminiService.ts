@@ -20,18 +20,19 @@ DIRETRIZES:
 
 export const getGeminiResponse = async (userPrompt: string, history: { role: 'user' | 'model', text: string }[]) => {
   try {
-    // Acesso direto via process.env.API_KEY conforme exigido
-    const apiKey = process.env.API_KEY;
+    // Limpeza da chave para evitar espaços ou aspas extras que o Vercel pode injetar
+    const rawApiKey = process.env.API_KEY;
+    const apiKey = rawApiKey?.trim().replace(/["']/g, "");
     
     if (!apiKey || apiKey === "undefined" || apiKey === "") {
-      console.error("ERRO: API_KEY não configurada no ambiente.");
-      return "Olá! Notei que minha chave de comunicação com os servidores de IA ainda não foi ativada. Por favor, certifique-se de que a variável 'API_KEY' foi adicionada corretamente no painel do Vercel e que um novo Deploy foi realizado.";
+      console.error("ERRO CRÍTICO: Variável de ambiente API_KEY não encontrada.");
+      return "Olá! A minha chave de acesso (API_KEY) não foi detectada pelo sistema. Por favor, verifique se você a adicionou no Vercel (em Settings > Environment Variables), salvou e realizou um NOVO DEPLOY.";
     }
 
+    // O modelo 'gemini-flash-latest' é o mais recomendado para o plano gratuito
     const ai = new GoogleGenAI({ apiKey });
 
-    // Filtragem obrigatória: A API Gemini não aceita histórico que comece com 'model'
-    // Removemos a saudação inicial se ela for a primeira mensagem.
+    // A API Gemini exige que a conversa comece com 'user'
     const validHistory = history.filter((msg, index) => {
       if (index === 0 && msg.role === 'model') return false;
       return true;
@@ -49,11 +50,11 @@ export const getGeminiResponse = async (userPrompt: string, history: { role: 'us
     ];
 
     const response: GenerateContentResponse = await ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
+      model: 'gemini-flash-latest', // Modelo otimizado para o plano gratuito
       contents: contents,
       config: {
         systemInstruction: SYSTEM_INSTRUCTION,
-        temperature: 0.8,
+        temperature: 0.7,
         topP: 0.95,
       },
     });
@@ -61,17 +62,25 @@ export const getGeminiResponse = async (userPrompt: string, history: { role: 'us
     const text = response.text;
     
     if (!text) {
-      throw new Error("A API retornou uma resposta vazia.");
+      throw new Error("Resposta vazia da API");
     }
 
     return text;
   } catch (error: any) {
-    console.error("Erro na API Gemini:", error);
+    console.error("Erro detalhado da API Gemini:", error);
     
-    if (error.message?.includes("API key not valid") || error.message?.includes("403")) {
-      return "Sua Chave de API parece inválida ou não tem permissão para este modelo. Verifique as configurações no Google AI Studio.";
+    const errorMessage = error.message || "";
+    
+    // Erros de permissão ou chave
+    if (errorMessage.includes("API key not valid") || errorMessage.includes("403") || errorMessage.includes("permission denied")) {
+      return "Ops! Parece que minha chave de acesso gratuita está com problemas de permissão. Certifique-se de que a API 'Generative Language' está ativada no seu Google AI Studio. Enquanto isso, fale com nosso time no WhatsApp: (11) 97976-1882.";
     }
 
-    return "Olá! Tive um problema técnico ao acessar minha inteligência agora. Enquanto eu me recupero, nosso time humano pode te ajudar no WhatsApp: (11) 97976-1882.";
+    // Erros de limite de taxa (comum no plano grátis)
+    if (errorMessage.includes("429")) {
+      return "Recebi muitas perguntas agora! Por ser um serviço gratuito, tenho um limite de velocidade. Pode aguardar 10 segundos e tentar de novo? Ou chame no WhatsApp: (11) 97976-1882.";
+    }
+
+    return "Olá! Tive um pequeno soluço tecnológico aqui. Tente enviar sua mensagem novamente ou fale diretamente com nossos consultores no WhatsApp: (11) 97976-1882.";
   }
 };
